@@ -16,6 +16,22 @@ module.exports = (bot) => {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
   })
 
+  bot.respond(/reverse (.*)/i, function(res) {
+    console.log(res.match)
+    var reply = res.match[1];
+    let reverseReply = reply.split("").reverse().join("")
+ 
+    console.log(reverseReply)
+ 
+    return res.send(reverseReply);
+  });
+
+  bot.hear(/lunch/i, function(res) {
+    var meal=["pizza","burger","rice"]
+    var random1= Math.floor(Math.random()*3);
+    res.reply(meal[random1]);
+   })
+
   bot.hear(/misk/i, function(res)  {
     res.send('MiSK is the best!')
   })
