@@ -11,7 +11,6 @@
 //   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 module.exports = (bot) => {
-
   bot.hear(/badger/i, function(res) {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
   })
@@ -23,7 +22,26 @@ module.exports = (bot) => {
   bot.hear(/Hello!/, function(res) {
     return res.send("Hi there!");
   });
-
+      bot.hear(/marc/, function(res) {
+       const rev = res.match[1];
+       console.log(rev);
+       const rr = rev.split("").reverse().join("");
+       return res.send(rr);
+     });
+     bot.hear(/food/i, function(res) {
+      var street_num = ['Pizza', 'Rice', 'Jaresh', 'Margog', 'Areakh', 'Maasob', 'steak', 'shakshokah', 'beef', 'burger', 'Pasta'] ;
+      var a = Math.floor(Math.random() * 10) + 1;
+      console.log(a);
+      var b = street_num[a];
+      console.log(b);
+      return (res.send(street_num[a]));
+    })
+    bot.hear(/list/i, function(res) {
+        var street_num = ['Pizza', 'Rice', 'Jaresh', 'Margog', 'Areakh', 'Maasob', 'steak', 'shakshokah'] ;
+          for (var i= 0; i<= street_num.length; i++){
+               res.send(street_num[i]);
+          }
+        })
   bot.respond(/What's your favorite food?/, function(res) {
     return res.send("I'm a robot--I don't eat food!");
   });
@@ -52,6 +70,7 @@ module.exports = (bot) => {
     } else {
       return msg.reply("Nice to meet you, " + name + "!");
     }
+    
   
   });
 
