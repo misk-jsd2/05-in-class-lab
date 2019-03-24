@@ -10,10 +10,35 @@
 //
 //   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+
 module.exports = (bot) => {
 
   bot.hear(/badger/i, function(res) {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
+  })
+
+   bot.hear(/reverse (.*)/, function(res) {
+   const rev = res.match[1];
+   console.log(rev);
+   const rr = rev.split("").reverse().join("");
+   return res.send(rr);
+ });
+
+  bot.hear(/Hi/i, function(res) {
+    res.send('Fahad is the best')
+  })
+
+  bot.hear(/food (.*)/i, function(res) {
+    var foods = ["Pizza", "Rice", "Jaresh", "Margog", "Areakh", "Maasob", "steak", "shakshokah", "beef", "burger", 'Pasta'] ;
+    var a = Math.floor(Math.random() * 10) + 1;
+    var food = res.match[1]
+    var name = food;
+    if (name == "list"){
+      for (var i = 0; i < food.length; i++) {
+          res.send.foods[i]
+      }
+    else{
+    return (res.send(food[a]));}
   })
 
   bot.hear(/misk/i, function(res)  {
@@ -33,6 +58,7 @@ module.exports = (bot) => {
   })
   
   bot.respond(/open the (.*) doors/i, function(res) {
+    console.log(res.match)
     const doorType = res.match[1]
     console.log(doorType)
   
