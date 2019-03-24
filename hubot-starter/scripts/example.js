@@ -11,13 +11,83 @@
 //   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 module.exports = (bot) => {
+  // bot.hear(/Hello!/, function(res) {
+  //   return res.send("Hi Bashayer!");
+  // });
+  bot.hear(/list/i, function(res) {
+    res.send('Badger \n hello \n ! misk')
+  })
+ 
+  bot.hear(/lunch/i, function(res) {
+    var lunch = ['Pizza', 'Burger','Pasta'];
+    var random1 = Math.floor(Math.random() * lunch.length);
+    console.log(random1);
+    res.send(lunch[random1]);
+  })
+ 
+  bot.hear(/convert (.*)/i, function(res) {
 
+  var  x = document.converter.dollar.value = document.converter.rial.value * 3.75
+  
+
+  var y = document.converter.rial.value = document.converter.dollar.value * 3.75
+
+res.send(x);
+
+
+  })
+
+
+  bot.respond(/Reverse word (.*)/i, function(msg) {
+    var word;
+    word = msg.match[1];
+
+    function reverse(str){
+      let reversed = "";    
+      for (var i = str.length - 1; i >= 0; i--){        
+        reversed += str[i];
+      }    
+      return reversed;
+    } 
+
+    var rev = reverse(word);
+    return  msg.send(rev);
+  });
+  
+  // bot.hear(/convert/i, function(res) {
+
+  // var sr, usd, ;
+  // function init()
+  // {
+  //     sr = document.getElementById("SR");
+  //     usd = document.getElementById("USD");
+     
+  // }
+  
+  // function sr()
+  // {
+  //     usd.value = parseFloat(gbp.value) / 3.75;
+     
+  // }
+  
+  // function usd()
+  // {
+  //     sr.value = parseFloat(sr.value) * 3.75;
+     
+  // }
+  // res.send(sr);
+
+//
+  
+  bot.respond(/What's your favorite food?/, function(res) {
+    return res.send("I'm a robot--I don't eat food!");
+  });
   bot.hear(/badger/i, function(res) {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
   })
 
-  bot.hear(/misk/i, function(res)  {
-    res.send('MiSK is the best!')
+  bot.hear(/friends/i, function(res)  {
+    res.send('Friends Bashayer is the best!')
   })
 
   bot.hear(/Hello!/, function(res) {
@@ -55,6 +125,25 @@ module.exports = (bot) => {
   
   });
 
+  //i did it 
+  bot.respond(/todo (.*)/i, function(msg) {
+    var name;
+    name = msg.match[1];
+    if (name == "buy food"){
+      return msg.reply("TODOS: \n todo buy food");
+    } else if (name == "wash dog" ){
+      return msg.reply( "TODOS: \n buy food, wash dog ");
+    }
+    else if  (name == "take out trash" ){
+      return msg.reply( "TODOS: \n buy food, wash dog, take out trash ");
+    }
+    else {
+      return msg.reply("!");
+    }
+   
+  });
+  
+
   var squirrels = [
     "http://img.skitch.com/20100714-d6q52xajfh4cimxr3888yb77ru.jpg",
     "https://img.skitch.com/20111026-r2wsngtu4jftwxmsytdke6arwd.png",
@@ -70,7 +159,24 @@ module.exports = (bot) => {
   // bot.hear /ship it/i, (msg) ->
   //   msg.send msg.random squirrels
 
-
+  bot.respond(/what is your favorite (.*)/, function(msg) {
+    var fav;
+    fav = msg.match[1];
+    console.log(fav);
+    switch (fav) {
+      case "food":
+        return msg.reply("I'm a robot--I don't eat food!");
+        break;
+      case "band":
+        return msg.reply("It's gotta be Daft Punk!");
+        break;
+      case "programming language":
+        return msg.reply("Javascript, of course!");
+        break;
+      default:
+        return msg.reply("I don't have a favorite " + fav + ". What's yours?");
+    }
+  });
 
 
   //
