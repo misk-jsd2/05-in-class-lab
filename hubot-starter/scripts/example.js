@@ -1,4 +1,4 @@
-'use strict'
+use strict'
 
 // Description:
 //   Example scripts for you to examine and try out.
@@ -16,31 +16,74 @@ module.exports = (bot) => {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
   })
 
-  bot.hear(/misk/i, function(res)  {
-    res.send('MiSK is the best!')
-  })
-
   bot.hear(/Hello!/, function(res) {
     return res.send("Hi there!");
+  });
+
+  bot.hear(/misk/i, function(res)  {
+    res.send('MiSK is the best!')
+  });
+
+  bot.hear(/How is this/, function(res)  {
+    res.send('Im your freiend')
+  });
+
+  bot.hear(/Do you love me/, function(res)  {
+    res.send('yeeeeeees')
   });
 
   bot.respond(/What's your favorite food?/, function(res) {
     return res.send("I'm a robot--I don't eat food!");
   });
 
+  // bot.respond(/List?/, function(res) {
+
   bot.hear(/diesel/i, function(res) {
     res.send('Bark!')
   })
-  
+
+
+  bot.respond(/reverse (.*)/i, function(rev) {
+    var name = rev.match[1];
+
+  var splitString = name.split(''); // var splitString = "hello".split("");
+    // ["h", "e", "l", "l", "o"]
+
+    // Step 2. Use the reverse() method to reverse the new created array
+    var reverseArray = splitString.reverse(); // var reverseArray = ["h", "e", "l", "l", "o"].reverse();
+    // ["o", "l", "l", "e", "h"]
+
+    // Step 3. Use the join() method to join all elements of the array into a string
+    var joinArray = reverseArray.join(''); // var joinArray = ["o", "l", "l", "e", "h"].join("");
+    // "olleh"
+    // rev=joinArray;
+
+bot.hear(/Lunch/) ,function(rev){
+var Lunch=["pizza","rice","burger"];
+var random1 = Math.floor((Math.random()*Lunch.length));
+
+return rev.send(Lunch[random1]); /
+
+
+});
+
+
+
+
+var random1 = Math.floor((Math.random());
+
+retur
+
+
   bot.respond(/open the (.*) doors/i, function(res) {
     const doorType = res.match[1]
     console.log(doorType)
-  
+
     if (doorType === 'pod bay') {
       res.reply('I’m afraid I can’t let you do that.')
       return
     }
-  
+
     res.reply(`Opening ${doorType} doors`)
   })
 
@@ -52,7 +95,7 @@ module.exports = (bot) => {
     } else {
       return msg.reply("Nice to meet you, " + name + "!");
     }
-  
+
   });
 
   var squirrels = [
@@ -65,7 +108,7 @@ module.exports = (bot) => {
   bot.hear(/ship it/i, function(res) {
     res.send(res.random(squirrels))
   })
-  
+
 
   // bot.hear /ship it/i, (msg) ->
   //   msg.send msg.random squirrels
@@ -156,21 +199,21 @@ module.exports = (bot) => {
   //   }
   // })
   //
-  bot.respond(/have a soda/i, function(response) {
-    // Get number of sodas had (coerced to a number).
-    const sodasHad = +bot.brain.get('totalSodas') || 0
-  
-    if (sodasHad > 4) {
-      response.reply('I’m too fizzy…')
-      return
-    }
-  
-    response.reply('Sure!')
-    bot.brain.set('totalSodas', sodasHad + 1)
-  })
-  
-  bot.respond(/sleep it off/i, function(res) {
-    bot.brain.set('totalSodas', 0)
-    res.reply('zzzzz')
-  })
+//   bot.respond(/have a soda/i, function(response) {
+//     // Get number of sodas had (coerced to a number).
+//     const sodasHad = +bot.brain.get('totalSodas') || 0
+//
+//     if (sodasHad > 4) {
+//       response.reply('I’m too fizzy…')
+//       return
+//     }
+//
+//     response.reply('Sure!')
+//     bot.brain.set('totalSodas', sodasHad + 1)
+//   })
+//
+//   bot.respond(/sleep it off/i, function(res) {
+//     bot.brain.set('totalSodas', 0)
+//     res.reply('zzzzz')
+//   })
 }
