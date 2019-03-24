@@ -12,8 +12,24 @@
 
 module.exports = (bot) => {
 
+  // bot.hear(/r1evers/, function(msg) {
+  //   var name;
+  // name = msg.match[1];
+  //   return res.send("what do you want to rvers?");
+  // });
+
+  bot.hear(/hello (.*)/i, function(msg) {
+    var str;
+    str = msg.match[1];
+    msg.send("heloo " + str);
+  })
+
+  bot.hear(/yasser/, function(res) {
+    return res.send("yeah,, it's me");
+  });
+
   bot.hear(/badger/i, function(res) {
-    res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
+    res.send('Hi, im yasser')
   })
 
   bot.hear(/misk/i, function(res)  {
@@ -115,11 +131,11 @@ module.exports = (bot) => {
   //
   // let annoyIntervalId = null
   //
-  // bot.respond(/annoy me/, function(res) {
-  //   if (annoyIntervalId) {
-  //     res.send('AAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEEEEIIIIIIIIHHHHHHHHHH')
-  //     return
-  //   }
+  bot.respond(/annoy me/, function(res) {
+    if (annoyIntervalId) {
+      res.send('AAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEEEEIIIIIIIIHHHHHHHHHH')
+      return
+    }
   //
   //   res.send('Hey, want to hear the most annoying sound in the world?')
   //   annoyIntervalId = setInterval(() => res.send('AAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEEEEIIIIIIIIHHHHHHHHHH'), 1000)
