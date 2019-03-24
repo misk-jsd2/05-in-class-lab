@@ -24,14 +24,23 @@ module.exports = (bot) => {
     return res.send("Hi there!");
   });
 
+  bot.hear(/lunch!/, function(res) {
+    var arr=['aa','bb','cc','dd','ee','ff'];
+    return res.send(arr[Math.floor(Math.random() * (5 - 0 + 1) ) + 0]);
+  });
+
+
+  bot.hear(/list!/, function(res) {
+    var arr=['badger','misk','Hello!','What is your favorite food?','open the (door Type) doors','lunch!'];
+    return res.reply(arr.join('\n'));
+  });
+
+
+
   bot.respond(/What's your favorite food?/, function(res) {
     return res.send("I'm a robot--I don't eat food!");
   });
 
-  bot.hear(/diesel/i, function(res) {
-    res.send('Barkkkkkkkkkkkkkkkk!')
-  })
-  
   bot.respond(/open the (.*) doors/i, function(res) {
     const doorType = res.match[1]
     console.log(doorType)
@@ -44,6 +53,13 @@ module.exports = (bot) => {
     res.reply(`Opening ${doorType} doors`)
   })
 
+  var newarray=[];
+  bot.respond(/todo (.*)/i, function(msg) {
+    newarray.push(msg.match[1]);
+    return msg.reply("TODOS:\n" + newarray); 
+  });
+
+
   bot.respond(/Hi Hubot! My name is (.*)/i, function(msg) {
     var name;
     name = msg.match[1];
@@ -55,42 +71,40 @@ module.exports = (bot) => {
   
   });
 
-bot.hear(/list!/, function(res) {
-   var arr=['badger','misk','Hello!','What is your favorite food?','open the (door Type) doors','lunch!'];
-   return res.reply(arr.join('\n'));
- });
+  bot.respond(/reverse (.*)/i, function(msg) {
+    var name;
+    name = msg.match[1];
+    var newarray=new Array();
+    for (var i = name.length - 1; i >= 0; i--) 
+    {
+      newarray.push(name[i]);
+    }
+    return msg.reply(newarray.join(''));
+  });
 
-bot.hear(/lunch!/, function(res) {
-   var arr=['aa','bb','cc','dd','ee','ff'];
-   return res.send(arr[Math.floor(Math.random() * (5 - 0 + 1) ) + 0]);
- });
+  bot.hear(/rock/i, function(res) {
+    var rock =["https://upload.wikimedia.org/wikipedia/commons/f/f1/Dwayne_Johnson_2%2C_2013.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/6/68/Dwayne_Johnson_at_the_2009_Tribeca_Film_Festival.jpg"];
 
-bot.respond(/reverse (.*)/i, function(msg) {
-   var name;
-   name = msg.match[1];
-   var newarray=new Array();
-   for (var i = name.length - 1; i >= 0; i--)
-   {
-     newarray.push(name[i]);
-   }
-   return msg.reply(newarray.join(''));
- });
+return res.send(res.random(rock))
+});
 
 
-
-  
-  
-
-bot.respond(/Convert SAR (.*) to USD/i, function(msg) {
-   var name = msg.match[1];
-   name = name * 3.75;
-   return msg.reply('It is equal ' + name + ' USD');
+  bot.respond(/Convert SAR (.*) to USD/i, function(msg) {
+  var name = msg.match[1];
+  name = name * 3.75;
+  return msg.reply('It is equal ' + name + ' USD');
 });
 bot.respond(/Convert USD (.*) to SAR/i, function(msg) {
-   var name = msg.match[1];
-   name = name / 3.75;
-   return msg.reply('It is equal ' + name + ' SAR');
+  var name = msg.match[1];
+  name = name / 3.75;
+  return msg.reply('It is equal ' + name + ' SAR');
 });
+
+
+
+
+
 
   var squirrels = [
     "http://img.skitch.com/20100714-d6q52xajfh4cimxr3888yb77ru.jpg",
