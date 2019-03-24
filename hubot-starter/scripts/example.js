@@ -12,8 +12,26 @@
 
 module.exports = (bot) => {
 
+bot.hear(/Hi/, function(res) {
+  return res.send("Hi Bro!");
+});
+
+bot.respond(/What's your favorite car/, function(res) {
+  return res.send("I'm a robot--I don't drive a car!");
+});
+
+ var sa = [
+    "http://dash.ga.co/assets/jeff-bg.png'",
+    "http://dash.ga.co/assets/dessertcourse.jpg"
+  ];
+
+  bot.hear(/sultan/i, function(res) {
+    res.send(res.random(sa))
+  })
+
+
   bot.hear(/badger/i, function(res) {
-    res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
+    res.send('Badgers? BADGERs? WE DON’T NEED NO STINKIN BADGERS')
   })
 
   bot.hear(/misk/i, function(res)  {
