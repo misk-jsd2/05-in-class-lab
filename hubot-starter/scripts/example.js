@@ -10,18 +10,77 @@
 //
 //   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+
 module.exports = (bot) => {
+  bot.respond(/Reverse word (.*)/i, function(msg) {
+      var word;
+      word = msg.match[1];
+
+      function reverse(str){
+        let reversed = "";
+        for (var i = str.length - 1; i >= 0; i--){
+          reversed += str[i];
+        }
+        return reversed;
+      }
+
+      var rev = reverse(word);
+      return  msg.send(rev);
+    });
+
+    bot.hear(/list/i, function(res) {
+        res.send('Badger \n hello \n ! misk')
+      })
+
+bot.hear(/lunch/i,function (res) {
+  var luncha = [burger, pizza , pasta , waffle];
+  var random1 = Math.random(Math.random()*luncha.length);
+  return  res.send(luncha[random1]);
+})
+
+
+  bot.respond(/todo (.*)/i, function(msg) {
+    var name;
+    name = msg.match[1];
+    if (name == "buy food"){
+      return msg.reply("TODOS: \n todo buy food");
+    } else if (name == "wash dog" ){
+      return msg.reply( "TODOS: \n buy food, wash dog ");
+    }
+    else if  (name == "take out trash" ){
+      return msg.reply( "TODOS: \n buy food, wash dog, take out trash ");
+    }
+    else {
+      return msg.reply("!");
+    }
+
+  });
+
+
+
+bot.hear(/Convert(.*)to(.*)/i,function (res) {
+  var Currency;
+  var num;
+  num= res.match[1]
+  Currency = res.match[2];
+  if(Currency == "usd"){
+    num=num*3.75;
+  }else if(Currency == "SAR"){
+    num = num/3.75;
+  }
+  return res.send(num);
+})
 
   bot.hear(/badger/i, function(res) {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
   })
 
-  bot.hear(/misk/i, function(res)  {
-    res.send('MiSK is the best!')
+  bot.hear(/abeer/i, function(res)  {
+    res.send('Abeer is the best!')
   })
 
   bot.hear(/Hello!/, function(res) {
-    return res.send("Hi there!");
+    return res.send("Hi Abeer!");
   });
 
   bot.respond(/What's your favorite food?/, function(res) {
@@ -31,16 +90,16 @@ module.exports = (bot) => {
   bot.hear(/diesel/i, function(res) {
     res.send('Bark!')
   })
-  
+
   bot.respond(/open the (.*) doors/i, function(res) {
     const doorType = res.match[1]
     console.log(doorType)
-  
+
     if (doorType === 'pod bay') {
       res.reply('I’m afraid I can’t let you do that.')
       return
     }
-  
+
     res.reply(`Opening ${doorType} doors`)
   })
 
@@ -52,7 +111,7 @@ module.exports = (bot) => {
     } else {
       return msg.reply("Nice to meet you, " + name + "!");
     }
-  
+
   });
 
   var squirrels = [
@@ -65,7 +124,7 @@ module.exports = (bot) => {
   bot.hear(/ship it/i, function(res) {
     res.send(res.random(squirrels))
   })
-  
+
 
   // bot.hear /ship it/i, (msg) ->
   //   msg.send msg.random squirrels
@@ -159,16 +218,16 @@ module.exports = (bot) => {
   bot.respond(/have a soda/i, function(response) {
     // Get number of sodas had (coerced to a number).
     const sodasHad = +bot.brain.get('totalSodas') || 0
-  
+
     if (sodasHad > 4) {
       response.reply('I’m too fizzy…')
       return
     }
-  
+
     response.reply('Sure!')
     bot.brain.set('totalSodas', sodasHad + 1)
   })
-  
+
   bot.respond(/sleep it off/i, function(res) {
     bot.brain.set('totalSodas', 0)
     res.reply('zzzzz')
