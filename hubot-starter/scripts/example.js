@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 // Description:
 //   Example scripts for you to examine and try out.
@@ -9,16 +9,65 @@
 //   Uncomment the ones you want to try and experiment with.
 //
 //   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
+function reverseString(str) {
+  // Step 1. Use the split() method to return a new array
+  var splitString = str.split(""); // var splitString = "hello".split("");
+  // ["h", "e", "l", "l", "o"]
 
-module.exports = (bot) => {
+  // Step 2. Use the reverse() method to reverse the new created array
+  var reverseArray = splitString.reverse(); // var reverseArray = ["h", "e", "l", "l", "o"].reverse();
+  // ["o", "l", "l", "e", "h"]
 
+  // Step 3. Use the join() method to join all elements of the array into a string
+  var joinArray = reverseArray.join(""); // var joinArray = ["o", "l", "l", "e", "h"].join("");
+  // "olleh"
+
+  //Step 4. Return the reversed string
+  return joinArray; // "olleh"
+}
+var todo = [];
+
+module.exports = bot => {
   bot.hear(/badger/i, function(res) {
-    res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
-  })
+    res.send(
+      "#mohmmed-bot: Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS"
+    );
+  });
+  // revers
+  bot.respond(/revers (.*)/i, function(msg) {
+    var str;
+    str = msg.match[1];
+    msg.send(reverseString(str));
+  });
+  // Todo commands
+  bot.respond(/todo add (.*)/i, function(msg) {
+    var str;
+    str = msg.match[1];
+    todo.push(str);
+    msg.send(todo.toString());
+  });
 
-  bot.hear(/misk/i, function(res)  {
-    res.send('MiSK is the best!')
-  })
+  bot.respond(/todo remove (.*)/i, function(msg) {
+    var str;
+    str = msg.match[1];
+    todo = todo.filter(todoItem => todoItem != str);
+    if (todo.length <= 0) {
+      res.send("you have nothong to do ! add some.");
+    } else {
+      msg.send(todo.toString());
+    }
+  });
+  // bot.hear(/todo/, function(res) {
+  //   if (todo.length <=0){
+  //     res.send('you have nothong to do ! add some.');
+  //   }else{
+  //     res.send(todo.join("-"));
+  //   }
+  // });
+  // end of Todo
+  bot.hear(/misk/i, function(res) {
+    res.send("MiSK is the best!");
+  });
 
   bot.hear(/Hello!/, function(res) {
     return res.send("Hi there!");
@@ -29,30 +78,29 @@ module.exports = (bot) => {
   });
 
   bot.hear(/diesel/i, function(res) {
-    res.send('Bark!')
-  })
-  
+    res.send("Bark!");
+  });
+
   bot.respond(/open the (.*) doors/i, function(res) {
-    const doorType = res.match[1]
-    console.log(doorType)
-  
-    if (doorType === 'pod bay') {
-      res.reply('I’m afraid I can’t let you do that.')
-      return
+    const doorType = res.match[1];
+    console.log(doorType);
+
+    if (doorType === "pod bay") {
+      res.reply("I’m afraid I can’t let you do that.");
+      return;
     }
-  
-    res.reply(`Opening ${doorType} doors`)
-  })
+
+    res.reply(`Opening ${doorType} doors`);
+  });
 
   bot.respond(/Hi Hubot! My name is (.*)/i, function(msg) {
     var name;
     name = msg.match[1];
-    if (name == "Hubot"){
+    if (name == "Hubot") {
       return msg.send("You're not Hubot--I'm Hubot!");
     } else {
       return msg.reply("Nice to meet you, " + name + "!");
     }
-  
   });
 
   var squirrels = [
@@ -63,15 +111,11 @@ module.exports = (bot) => {
   ];
 
   bot.hear(/ship it/i, function(res) {
-    res.send(res.random(squirrels))
-  })
-  
+    res.send(res.random(squirrels));
+  });
 
   // bot.hear /ship it/i, (msg) ->
   //   msg.send msg.random squirrels
-
-
-
 
   //
   // bot.hear(/I like pie/i, function(res) {
@@ -158,19 +202,19 @@ module.exports = (bot) => {
   //
   bot.respond(/have a soda/i, function(response) {
     // Get number of sodas had (coerced to a number).
-    const sodasHad = +bot.brain.get('totalSodas') || 0
-  
+    const sodasHad = +bot.brain.get("totalSodas") || 0;
+
     if (sodasHad > 4) {
-      response.reply('I’m too fizzy…')
-      return
+      response.reply("I’m too fizzy…");
+      return;
     }
-  
-    response.reply('Sure!')
-    bot.brain.set('totalSodas', sodasHad + 1)
-  })
-  
+
+    response.reply("Sure!");
+    bot.brain.set("totalSodas", sodasHad + 1);
+  });
+
   bot.respond(/sleep it off/i, function(res) {
-    bot.brain.set('totalSodas', 0)
-    res.reply('zzzzz')
-  })
-}
+    bot.brain.set("totalSodas", 0);
+    res.reply("zzzzz");
+  });
+};
