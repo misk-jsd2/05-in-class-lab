@@ -10,14 +10,43 @@
 //
 //   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+
+
 module.exports = (bot) => {
+bot.hear(/reverse(.*)/i, function (res) {
+  var rev = split("").reverse().join("");
+  return res.send(rev);
+})
+
+bot.hear(/lunch/i,function (res) {
+  var luncha = [burger, pizza , pasta , waffle];
+  var random1 = Math.random(Math.random()*luncha.length);
+  return  res.send(luncha[random1]);
+})
+
+bot.respond(/list/i,function(res){
+res.send("badger \n Hello! \n misk");
+})
+
+bot.hear(/Convert(.*)to(.*)/i,function (res) {
+  var Currency;
+  var num;
+  num= res.match[1]
+  Currency = res.match[2];
+  if(Currency == "usd"){
+    num=num*3.75;
+  }else if(Currency == "SAR"){
+    num = num/3.75;
+  }
+  return res.send(num);
+})
 
   bot.hear(/badger/i, function(res) {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
   })
 
   bot.hear(/misk/i, function(res)  {
-    res.send('MiSK is the best!')
+    res.send('abeer is the best!')
   })
 
   bot.hear(/Hello!/, function(res) {
@@ -31,16 +60,16 @@ module.exports = (bot) => {
   bot.hear(/diesel/i, function(res) {
     res.send('Bark!')
   })
-  
+
   bot.respond(/open the (.*) doors/i, function(res) {
     const doorType = res.match[1]
     console.log(doorType)
-  
+
     if (doorType === 'pod bay') {
       res.reply('I’m afraid I can’t let you do that.')
       return
     }
-  
+
     res.reply(`Opening ${doorType} doors`)
   })
 
@@ -52,7 +81,7 @@ module.exports = (bot) => {
     } else {
       return msg.reply("Nice to meet you, " + name + "!");
     }
-  
+
   });
 
   var squirrels = [
@@ -65,7 +94,7 @@ module.exports = (bot) => {
   bot.hear(/ship it/i, function(res) {
     res.send(res.random(squirrels))
   })
-  
+
 
   // bot.hear /ship it/i, (msg) ->
   //   msg.send msg.random squirrels
@@ -159,16 +188,16 @@ module.exports = (bot) => {
   bot.respond(/have a soda/i, function(response) {
     // Get number of sodas had (coerced to a number).
     const sodasHad = +bot.brain.get('totalSodas') || 0
-  
+
     if (sodasHad > 4) {
       response.reply('I’m too fizzy…')
       return
     }
-  
+
     response.reply('Sure!')
     bot.brain.set('totalSodas', sodasHad + 1)
   })
-  
+
   bot.respond(/sleep it off/i, function(res) {
     bot.brain.set('totalSodas', 0)
     res.reply('zzzzz')
