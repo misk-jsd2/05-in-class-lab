@@ -12,59 +12,105 @@
 
 module.exports = (bot) => {
 
-  bot.hear(/badger/i, function(res) {
-    res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
-  })
+ 
 
-  bot.hear(/misk/i, function(res)  {
-    res.send('MiSK is the best!')
-  })
+  bot.respond(/Reverse word (.*)/i, function(msg) {
+    var word;
+    word = msg.match[1];
 
-  bot.hear(/Hello!/, function(res) {
-    return res.send("Hi there!");
+    function reverse(str){
+      let reversed = "";    
+      for (var i = str.length - 1; i >= 0; i--){        
+        reversed += str[i];
+      }    
+      return reversed;
+    } 
+
+    var rev = reverse(word);
+    return  msg.send(rev);
   });
 
-  bot.respond(/What's your favorite food?/, function(res) {
-    return res.send("I'm a robot--I don't eat food!");
-  });
-
-  bot.hear(/diesel/i, function(res) {
-    res.send('Bark!')
-  })
-  
-  bot.respond(/open the (.*) doors/i, function(res) {
-    const doorType = res.match[1]
-    console.log(doorType)
-  
-    if (doorType === 'pod bay') {
-      res.reply('I’m afraid I can’t let you do that.')
-      return
+  bot.respond(/Convert to USD (.*)/i, function() {
+    var USD;
+    USD = res.match[1];
+     
+    function ConToUSD(X){
+      con = X *3.75;
+      return con
     }
-  
-    res.reply(`Opening ${doorType} doors`)
-  })
-
-  bot.respond(/Hi Hubot! My name is (.*)/i, function(msg) {
-    var name;
-    name = msg.match[1];
-    if (name == "Hubot"){
-      return msg.send("You're not Hubot--I'm Hubot!");
-    } else {
-      return msg.reply("Nice to meet you, " + name + "!");
-    }
-  
+    var convert = ConToUSD(USD);
+    return res.send(convert);
   });
 
-  var squirrels = [
-    "http://img.skitch.com/20100714-d6q52xajfh4cimxr3888yb77ru.jpg",
-    "https://img.skitch.com/20111026-r2wsngtu4jftwxmsytdke6arwd.png",
-    "http://cl.ly/1i0s1r3t2s2G3P1N3t3M/Screen_Shot_2011-10-27_at_9.36.45_AM.png",
-    "http://shipitsquirrel.github.com/images/squirrel.png"
-  ];
 
-  bot.hear(/ship it/i, function(res) {
-    res.send(res.random(squirrels))
-  })
+  // bot.respond(/What's your favorite food?/, function(res) {
+  //   return res.send("I'm a robot--I don't eat food!");
+  // });
+
+  // bot.respond(/Hi Hubot! My name is (.*)/i, function(msg) {
+  //   var name;
+  //   name = msg.match[1];
+  //   if (name == "Hubot"){
+  //     return msg.send("You're not Hubot--I'm Hubot!");
+  //   } else {
+  //     return msg.reply("Nice to meet you, " + name + "!");
+  // //   }
+  
+  // });
+
+  // bot.hear(/badger/i, function(res) {
+  //   res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
+  // })
+
+  // bot.hear(/marc/i, function(res)  {
+  //   res.send('Marc is the best!')
+  // });
+
+  // // bot.hear(/Hello!/, function(res) {
+  // //   return res.send("Hi there!");
+  // // });
+
+  // bot.respond(/What's your favorite food?/, function(res) {
+  //   return res.send("I'm a robot--I don't eat food!");
+  // });
+
+  // bot.hear(/diesel/i, function(res) {
+  //   res.send('Bark!')
+  // })
+  
+  // bot.respond(/open the (.*) doors/i, function(res) {
+  //   const doorType = res.match[1]
+  //   console.log(doorType)
+  
+  //   if (doorType === 'pod bay') {
+  //     res.reply('I’m afraid I can’t let you do that.')
+  //     return
+  //   }
+  
+  //   res.reply(`Opening ${doorType} doors`)
+  // })
+
+  // bot.respond(/Hi Hubot! My name is (.*)/i, function(msg) {
+  //   var name;
+  //   name = msg.match[1];
+  //   if (name == "Hubot"){
+  //     return msg.send("You're not Hubot--I'm Hubot!");
+  //   } else {
+  //     return msg.reply("Nice to meet you, " + name + "!");
+  //   }
+  
+  // });
+
+  // var squirrels = [
+  //   "http://img.skitch.com/20100714-d6q52xajfh4cimxr3888yb77ru.jpg",
+  //   "https://img.skitch.com/20111026-r2wsngtu4jftwxmsytdke6arwd.png",
+  //   "http://cl.ly/1i0s1r3t2s2G3P1N3t3M/Screen_Shot_2011-10-27_at_9.36.45_AM.png",
+  //   "http://shipitsquirrel.github.com/images/squirrel.png"
+  // ];
+
+  // bot.hear(/ship it/i, function(res) {
+  //   res.send(res.random(squirrels))
+  // })
   
 
   // bot.hear /ship it/i, (msg) ->
@@ -114,23 +160,23 @@ module.exports = (bot) => {
   // })
   //
   // let annoyIntervalId = null
-  //
-  // bot.respond(/annoy me/, function(res) {
+  
+  // bot.hear(/best/, function(res) {
   //   if (annoyIntervalId) {
-  //     res.send('AAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEEEEIIIIIIIIHHHHHHHHHH')
+  //     res.send('Marc is the best!')
   //     return
   //   }
-  //
-  //   res.send('Hey, want to hear the most annoying sound in the world?')
-  //   annoyIntervalId = setInterval(() => res.send('AAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEEEEIIIIIIIIHHHHHHHHHH'), 1000)
+  
+  //   res.send('Hey, want to know who is the best teacher the world?')
+  //   annoyIntervalId = setInterval(() => res.send('Marc is the best!'), 1000)
   // })
-  //
+  // //
   // bot.respond(/unannoy me/, function(res) {
   //   if (!annoyIntervalId) {
   //     res.send('Not annoying you right now, am I?')
   //     return
   //   }
-  //
+  
   //   res.send('OKAY, OKAY, OKAY!')
   //   clearInterval(annoyIntervalId)
   //   annoyIntervalId = null
