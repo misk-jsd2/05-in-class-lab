@@ -9,11 +9,17 @@
 //   Uncomment the ones you want to try and experiment with.
 //
 //   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
-
+ 
 module.exports = (bot) => {
+  function reverseString(str) {
 
-  bot.hear(/badger/i, function(res) {
-    res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
+    return str.split("").reverse().join("");
+}
+  bot.hear(/lunch/i, function(res) {
+   var foods = ['Kabsah','cheesecake','soup','you are in diet'];
+      var choosenFood = foods[Math.floor(Math.random() * foods.length)];
+      
+      res.send(choosenFood);
   })
 
   bot.hear(/misk/i, function(res)  {
@@ -32,7 +38,7 @@ module.exports = (bot) => {
     res.send('Bark!')
   })
   
-  bot.respond(/open the (.*) doors/i, function(res) {
+  bot.respond(/open the (.*) doors (.*) /i, function(res) {
     const doorType = res.match[1]
     console.log(doorType)
   
@@ -43,7 +49,21 @@ module.exports = (bot) => {
   
     res.reply(`Opening ${doorType} doors`)
   })
-
+     bot.respond(/reverse (.*)/i, function(res) {
+    const revWord = res.match[1]
+    console.log(revWord);
+   var reversed =  reverseString(revWord);
+    console.log(reversed)
+         console.log("reverse is working")
+  
+//    if (doorType === 'pod bay') {
+//      res.reply('I’m afraid I can’t let you do that.')
+//      return
+//    }
+//  
+    res.send(`${reversed}`);
+  })
+  
   bot.respond(/Hi Hubot! My name is (.*)/i, function(msg) {
     var name;
     name = msg.match[1];
@@ -65,6 +85,8 @@ module.exports = (bot) => {
   bot.hear(/ship it/i, function(res) {
     res.send(res.random(squirrels))
   })
+    
+
   
 
   // bot.hear /ship it/i, (msg) ->
