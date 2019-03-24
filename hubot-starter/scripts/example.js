@@ -10,7 +10,110 @@
 //
 //   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
+
+
 module.exports = (bot) => {
+
+  // bot.respond(/(.*) (.*) (.*) (.*)/i, function(msg) {
+  //   var a;
+  //   var b;
+  //   var c;
+  //   var d;
+  //   a = parseInt(msg.match[1]);
+  //   b = parseInt(msg.match[2]);
+  //   c = parseInt(msg.match[3]);
+  //   d = parseInt(msg.match[4]);
+  
+  //   return msg.reply(d + " " + c + " " + b + " " + a);
+  // });
+
+  // bot.respond(/rever(.*)/i, function(msg) {
+
+  //   var a = parseInt(msg.match[0]).reverse();
+    
+  //   return msg.reply(a);
+  // });
+
+  // bot.hear(/food/i, function(res) {
+  //   var street_num = ['Pizza', 'Rice', '“Jaresh”', '“Margog”', '“Areakh”', '“Maasob”', '“steak”', '“shakshokah”', '“beef”', '“burger”', '‘Pasta’'] ;
+  //   var a = Math.floor(Math.random() * 10) + 1;
+  //   console.log(a);
+  //   var b = street_num[a];
+  //   console.log(b);
+  //   return (res.send(street_num[a]));
+  // })
+
+  // bot.respond(/rock/i, function(res) {
+  //   var street_num = ['https://upload.wikimedia.org/wikipedia/commons/f/f1/Dwayne_Johnson_2%2C_2013.jpg', 'Rice','https://upload.wikimedia.org/wikipedia/commons/e/e2/Intercontinental_Champion_THE_ROCK.jpg','https://upload.wikimedia.org/wikipedia/commons/c/c8/WWE_-_Sheffield_020499_%2849%29.jpg'] ;
+  //   var a = Math.floor(Math.random() * 3) + 1;
+  //   console.log(a);
+  //   var b = street_num[a];
+  //   console.log(b);
+  //   return (res.send(street_num[a]));
+  // })
+
+  // bot.hear(/rock/i, function(res) {
+  //   var rock = ['https://upload.wikimedia.org/wikipedia/commons/f/f1/Dwayne_Johnson_2%2C_2013.jpg', 'Rice','https://upload.wikimedia.org/wikipedia/commons/e/e2/Intercontinental_Champion_THE_ROCK.jpg','https://upload.wikimedia.org/wikipedia/commons/c/c8/WWE_-_Sheffield_020499_%2849%29.jpg'] ;
+
+  //   res.send(res.random(rock))
+  // })
+
+var r = []
+  bot.hear(/toDo list (.*)/i, function(res) {
+    var list = res.match[1];
+    
+    r.push(list)
+r.forEach(element => {
+
+  return res.send(element);
+});
+
+    // return res.send(push)
+    
+  });
+
+
+ 
+ 
+
+  // bot.hear(/marc/, function(res) {
+  //     const rev = res.match[0];
+  //     console.log(rev);
+  //     const rr = rev.split("").reverse().join("");
+  //     return res.send(rr);
+  //   });
+
+  // bot.hear(/my name is ibrahim/, function(res) {
+  //   return res.send();
+  // });
+
+
+  // bot.hear(/Who's the best?/, function(res) {
+  //   return res.send('of course not Fahad');
+  // });
+
+  // bot.respond(/Fahad is the best /, function(msg) {
+  //   var fav;
+  //   fav = msg.match[0];
+  //   console.log(fav);
+  //   switch (fav) {
+  //     case "food":
+  //       return msg.reply("I'm a robot--I don't eat food!");
+  //       break;
+  //     case "band":
+  //       return msg.reply("It's gotta be Daft Punk!");
+  //       break;
+  //     case "programming language":
+  //       return msg.reply("Javascript, of course!");
+  //       break;
+  //     default:
+  //       return msg.reply("I don't have a favorite " + fav + ". What's yours?");
+  //   }
+  // });
+  
+  // bot.hear(//, function(res) {
+  //   res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
+  // })
 
   bot.hear(/badger/i, function(res) {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
