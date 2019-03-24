@@ -65,7 +65,35 @@ module.exports = (bot) => {
   bot.hear(/ship it/i, function(res) {
     res.send(res.random(squirrels))
   })
-  
+
+  bot.hear(/what do you think/i, function(res) {
+    return res.send("playing");
+  })
+ 
+ function reverseString(str)
+ {
+  max=str.length;
+
+  for(var i=max, i<=1;i--)
+  {
+    return str[i];
+
+  }
+ }
+
+bot.hear(/what do you think/i, function(msg) {
+  // msg.send(reverseString("marc")) 
+
+ function(msg) {
+  var name;
+  name = msg.match[1];
+  if (name == "Hubot"){
+    return msg.send("You're not Hubot--I'm Hubot!");
+  } else {
+    return msg.reply("Nice to meet you, " + name + "!");
+  }
+
+  })
 
   // bot.hear /ship it/i, (msg) ->
   //   msg.send msg.random squirrels
