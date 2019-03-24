@@ -11,12 +11,26 @@
 //   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 
-
 module.exports = (bot) => {
-bot.hear(/reverse(.*)/i, function (res) {
-  var rev = split("").reverse().join("");
-  return res.send(rev);
-})
+  bot.respond(/Reverse word (.*)/i, function(msg) {
+      var word;
+      word = msg.match[1];
+
+      function reverse(str){
+        let reversed = "";
+        for (var i = str.length - 1; i >= 0; i--){
+          reversed += str[i];
+        }
+        return reversed;
+      }
+
+      var rev = reverse(word);
+      return  msg.send(rev);
+    });
+
+    bot.hear(/list/i, function(res) {
+        res.send('Badger \n hello \n ! misk')
+      })
 
 bot.hear(/lunch/i,function (res) {
   var luncha = [burger, pizza , pasta , waffle];
@@ -24,9 +38,25 @@ bot.hear(/lunch/i,function (res) {
   return  res.send(luncha[random1]);
 })
 
-bot.respond(/list/i,function(res){
-res.send("badger \n Hello! \n misk");
-})
+
+  bot.respond(/todo (.*)/i, function(msg) {
+    var name;
+    name = msg.match[1];
+    if (name == "buy food"){
+      return msg.reply("TODOS: \n todo buy food");
+    } else if (name == "wash dog" ){
+      return msg.reply( "TODOS: \n buy food, wash dog ");
+    }
+    else if  (name == "take out trash" ){
+      return msg.reply( "TODOS: \n buy food, wash dog, take out trash ");
+    }
+    else {
+      return msg.reply("!");
+    }
+
+  });
+
+
 
 bot.hear(/Convert(.*)to(.*)/i,function (res) {
   var Currency;
@@ -45,12 +75,12 @@ bot.hear(/Convert(.*)to(.*)/i,function (res) {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
   })
 
-  bot.hear(/misk/i, function(res)  {
-    res.send('abeer is the best!')
+  bot.hear(/abeer/i, function(res)  {
+    res.send('Abeer is the best!')
   })
 
   bot.hear(/Hello!/, function(res) {
-    return res.send("Hi there!");
+    return res.send("Hi Abeer!");
   });
 
   bot.respond(/What's your favorite food?/, function(res) {
