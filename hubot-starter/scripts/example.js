@@ -16,6 +16,9 @@ module.exports = (bot) => {
     res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
   })
 
+ bot.hear(/The/i, function(res) {
+    res.send('NO? NO? WE DON’T NEED NO STINKIN NO')
+  })
   bot.hear(/misk/i, function(res)  {
     res.send('MiSK is the best!')
   })
@@ -24,10 +27,50 @@ module.exports = (bot) => {
     return res.send("Hi there!");
   });
 
+   bot.hear(/marc/, function(res) {
+    const rev = res.match[0];
+    console.log(rev);
+    const rr = rev.split("").reverse().join("");
+    return res.send(rr);
+  });
+
+bot.hear(/food/i, function(res) {
+   var street_num = ['Pizza', 'Rice', 'Jaresh', 'Margog', 'Areakh', 'Maasob', 'steak', 'shakshokah'] ;
+   var a = Math.floor(Math.random() * 10) + 1;
+   console.log(a);
+   var b = street_num[a];
+   console.log(b);
+   return (res.send(street_num[a]));
+ })
+
+bot.hear(/list/i, function(res) {
+   var street_num = ['Pizza', 'Rice', 'Jaresh', 'Margog', 'Areakh', 'Maasob', 'steak', 'shakshokah'] ;
+   for (var i= 0; i<= street_num.length; i++){
+        res.send(street_num[i]);
+   }
+ })
+
+bot.hear(/To DO:(.*)/i, function(res) {
+   var Todoarray = ['by food'] ;
+   console.log(Todoarray)
+   if (res == ''){
+   for (var i= 0; i<= street_num.length; i++){
+        res.send(Todoarray[i]);
+   }
+ }
+ else 
+     Todoarray.push(res.match[1]);
+      console.log(Todoarray)
+   for (var i= 0; i<= street_num.length; i++){
+        res.send(Todoarray[i]);
+   }
+
+ })
+
   bot.respond(/What's your favorite food?/, function(res) {
     return res.send("I'm a robot--I don't eat food!");
   });
-
+  
   bot.hear(/diesel/i, function(res) {
     res.send('Bark!')
   })
