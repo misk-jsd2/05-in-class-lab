@@ -32,6 +32,10 @@ module.exports = (bot) => {
     res.send('Bark!')
   })
   
+  bot.hear(/jack/i, function(res) {
+  res.send('sparrow!')
+  })
+
   bot.respond(/open the (.*) doors/i, function(res) {
     const doorType = res.match[1]
     console.log(doorType)
@@ -43,6 +47,18 @@ module.exports = (bot) => {
   
     res.reply(`Opening ${doorType} doors`)
   })
+
+
+bot.respond(/reverse (.*)/i, function(res) {
+const revWord = res.match[1]
+console.log(revWord);
+var reversed =  reverseString(revWord);
+console.log(reversed)
+console.log(“reverse is working”)
+
+return res.send(`${reversed}`);
+})
+
 
   bot.respond(/Hi Hubot! My name is (.*)/i, function(msg) {
     var name;
@@ -71,7 +87,10 @@ module.exports = (bot) => {
   //   msg.send msg.random squirrels
 
 
-
+bot.hear(/lunch/i, function(res) {    
+res.send(res.random(meals))  
+})
+var meals=["pizza","burger","sushi"];
 
   //
   // bot.hear(/I like pie/i, function(res) {
