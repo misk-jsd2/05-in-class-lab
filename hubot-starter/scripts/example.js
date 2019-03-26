@@ -32,6 +32,10 @@ module.exports = (bot) => {
     res.send('Bark!')
   })
   
+  bot.hear(/peter/i, function(res) {
+    res.send('parker!')
+  })
+
   bot.respond(/open the (.*) doors/i, function(res) {
     const doorType = res.match[1]
     console.log(doorType)
@@ -66,12 +70,29 @@ module.exports = (bot) => {
     res.send(res.random(squirrels))
   })
   
+bot.respond(/reverse (.*)/i, function(res) {
+   const revWord = res.match[1]
+   console.log(revWord);
+  var reversed =  reverseString(revWord);
+   console.log(reversed)
+        console.log(“reverse is working”)
 
+
+  return res.send(`${reversed}`);
+ })
+
+bot.hear(/lunch/i, function(res) {
+  var foods = [‘rice’,‘cheesecake’,‘chickens’,‘you are in diet’];
+     var choosenFood = foods[Math.floor(Math.random() * foods.length)];
+
+     res.send(choosenFood);
+ })
   // bot.hear /ship it/i, (msg) ->
   //   msg.send msg.random squirrels
 
-
-
+bot.hear(/jack/i, function(res) {
+   res.send('sparrow!')
+ })
 
   //
   // bot.hear(/I like pie/i, function(res) {
